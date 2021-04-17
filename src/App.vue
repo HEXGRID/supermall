@@ -1,26 +1,27 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <router-view v-slot="{ Component }">
+      <keep-alive include="home">
+        <component :is="Component" v-if="$route.meta.keepAlive"/>
+      </keep-alive>
+      <component :is="Component"  v-if="!$route.meta.keepAlive"/>
+    </router-view>
+    <maintabbar></maintabbar>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+import Maintabbar from 'components/content/maintabbar/maintabbar'
+import home from 'views/home/home'
+  export default {
+    name: 'app',
+    components: {
+      Maintabbar,
+      home
+    }
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import "assets/css/base.css";
 </style>
