@@ -1,14 +1,18 @@
 <!--详情轮播图-->
 <template>
-  <swiper class="detail-swiper" ref="swiper">
+  <van-swipe :autoplay="2000" class="detail-swiper">
+    <van-swipe-item v-for="(item,index) in topBanner" :key="index">
+      <img :src="item" @load="imgLoad">
+    </van-swipe-item>
+  </van-swipe>
+  <!-- <swiper class="detail-swiper" ref="swiper">
     <swiper-item v-for="(banner,index) in topBanner" :key="index">
       <img :src="banner">
     </swiper-item>
-  </swiper>
+  </swiper> -->
 </template>
 
 <script>
-import {Swiper,SwiperItem} from 'components/common/swiper'
 export default {
   name:'detailswiper',
   props:{
@@ -21,18 +25,24 @@ export default {
   },
   data () {
     return {
-      hadimgLoad:false
+      hadimgLoad:true
     };
   },
-  updated() {
-    this.$refs.swiper.handleDom()
-    this.$refs.swiper.startTimer()
+  methods: {
+    imgLoad(){
+      if(this.hadimgLoad)
+        this.$emit('imgLoad')
+      this.hadimgLoad=false
+    }
   },
-  components: {Swiper,SwiperItem},
 }
 
 </script>
 <style scoped>
+img{
+  /* height: 100%; */
+  width: 100%;
+}
 .detail-swiper{
   height: 300px;
 }

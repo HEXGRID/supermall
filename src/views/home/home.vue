@@ -19,7 +19,8 @@
     @FindScrollPosition='ContentScroll'
     :pull-up-load='true'
     @pullingUp='loadMore'>
-      <home-swiper :banners='banners' @ImageLoad='swiperLoad'></home-swiper>
+      <!-- <home-swiper :banners='banners' @ImageLoad='swiperLoad'></home-swiper> -->
+      <vant-swiper :banners='banners' @imgLoad='swiperLoad'></vant-swiper>
 
       <recommend-view :recommends='recommends'></recommend-view>
 
@@ -38,9 +39,10 @@
 import Navbar from 'components/common/navbar/navbar'
 import tabControl from 'components/content/TabControl/TabControl'
 import Scroll from 'components/common/scroll/scroll.vue'
+import vantSwiper from 'components/common/swiper/vantSwiper'
 
 // 首页组件
-import HomeSwiper from 'views/home/childComp/HomeSwiper'
+// import HomeSwiper from 'views/home/childComp/HomeSwiper'
 import RecommendView from 'views/home/childComp/HomeRecommendView'
 import feature from 'views/home/childComp/Feature'
 import GoodsList from 'components/content/goods/GoodsList'
@@ -77,7 +79,7 @@ export default {
   },
   components:{
     Navbar,
-    HomeSwiper,
+    vantSwiper,
     RecommendView,
     feature,
     tabControl,

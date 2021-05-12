@@ -29,7 +29,8 @@ import shopinfo from 'views/detail/childComps/detailshopinfo'
 import detailimageinfo from 'views/detail/childComps/detailImageInfo'
 import detailparamsinfo from 'views/detail/childComps/detailParamsInfo'
 import detailcomment from 'views/detail/childComps/detailcomment'
-import GoodsList from "@/components/content/goods/GoodsList"
+
+import GoodsList from "components/content/goods/GoodsList"
 import backtop from 'components/content/backTop/backTop'
 import DetailBottomBar from 'views/detail/childComps/detailBottomBar'
 
@@ -43,8 +44,8 @@ export default {
     return {
       goodsiid:null,
       isShowBackTop:false,
-      detailbanner:[],
 
+      detailbanner:[],
       goods:{},
       shop:{},
       detailsInfo:{},
@@ -53,6 +54,7 @@ export default {
       recommendList:[],
 
       detailClassList:[],
+      detailIndex:0,
 
       // 数据加载判断
       Boldetail:true,
@@ -70,9 +72,9 @@ export default {
     },
 
     // 监听两个数据请求方法是否请求完数据
-    Loading(nval,oval){
-      console.log(oval);
-      console.log(nval);
+    Loading(nval){
+      // console.log(oval);
+      // console.log(nval);
       if(!(nval.Boldetail || nval.BolRecommentList))
         this.setLoading(false)
       else
@@ -156,15 +158,14 @@ export default {
       this.isShowBackTop=detailPosition>1000
 
       // // 处理滚动时导航栏响应事件
-      let detailIndex=0
-      for(let i=0;i<this.detailClassList.length;i++){
+      for(let i=0 ; i<this.detailClassList.length ; i++){
         if(detailPosition>=this.detailClassList[i].offsetTop && detailPosition<this.detailClassList[i+1].offsetTop){
-          if(detailIndex!=i){
-            detailIndex=i
-            this.$refs.detailnav.currentIndex=detailIndex
+          if(this.detailIndex!=i){
+            this.detailIndex=i
+            try {this.$refs.detailnav.currentIndex=this.detailIndex} catch (err){err}
           }
+          break;
         }
-        break;
       }
 
     },
