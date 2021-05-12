@@ -33,9 +33,12 @@ export default {
 
 <style scoped>
   .tab-bar-item {
-  flex: 1;
-  height: 49px;
-  text-align: center;
+    flex: 1;
+    height: 49px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   /* .tab-bar-item img{
     height: 24px;

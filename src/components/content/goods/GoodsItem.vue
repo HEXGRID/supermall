@@ -1,11 +1,11 @@
 <!--  -->
 <template>
   <div class="good-list-item" @click="goodsItemClick">
-    <img :src='goodItem.show.img'>
+    <img :src='showImg(goodItem)'>
     <div class="goods-info">
       <p>{{goodItem.title}}</p>
-      <span class="price">￥{{goodItem.price}}</span>
-      <span class="sale">{{goodItem.sale}}</span>
+      <span class="price left">￥{{goodItem.price}}</span>
+      <span class="sale right">{{goodItem.sale || goodItem.itemSale}}</span>
     </div>
   </div>
 </template>
@@ -30,9 +30,23 @@ export default {
       this.$router.push({
         path:'/detail',
         query:{
-          iid:this.goodItem.iid
+          iid:this.goodItem.iid || this.goodItem.item_id
         }
       })
+      // if(this.goodItem.iid){
+      //   this.$router.push({
+      //     path:'/detail',
+      //     query:{
+      //       iid:this.goodItem.iid || this.goodItem.item_id
+      //     }
+      //   })
+      // }
+      // else{
+      //   this.$toast(this.goodItem.title);
+      // }
+    },
+    showImg(item){
+      return item.img || item.image || item.show.img;
     }
   },
 }
@@ -59,10 +73,11 @@ export default {
 }
 .goods-info .price{
   color: var(--color-high-text);
-  margin-right: 80px;
+  margin-left: 10px;
 }
 .goods-info .sale {
   position: relative;
+  margin-right: 10px;
 }
 .goods-info .sale::before{
   content: '';

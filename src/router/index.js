@@ -25,6 +25,9 @@ const routes = [
   {
     path: '/category',
     name:'category',
+    meta:{
+      keepAlive:true
+    },
     component: category
   },
   {

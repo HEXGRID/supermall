@@ -40,9 +40,11 @@ export default {
     this.scroll.on('scroll',(position)=>{
       this.$emit('FindScrollPosition',position)
     })
-    this.scroll.on('pullingUp',()=>{
-      this.$emit('pullingUp')
-    })
+    if(this.pullUpLoad){
+      this.scroll.on('pullingUp',()=>{
+        this.$emit('pullingUp')
+      })
+    }
   },
   methods: {
     scrollTo(x,y,time=300){
@@ -56,6 +58,9 @@ export default {
     },
     refresh(){
       this.scroll && this.scroll.refresh()
+    },
+    scrollToElement(el,time){
+      this.scroll && this.scroll.scrollToElement(el,time)
     }
   },
 }

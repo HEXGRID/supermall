@@ -1,4 +1,4 @@
-<!--  -->
+<!--主页-->
 <template>
   <div id="home">
     <navbar class="home-nav">
@@ -48,6 +48,7 @@ import backtop from 'components/content/backTop/backTop'
 
 // 请求相关方法
 import {getHomeMultidata,getHomeGoods} from 'network/home'
+import { mapMutations } from "vuex";
 
 export default {
   name: 'home',
@@ -67,7 +68,11 @@ export default {
       // 吸顶相关
       tabControlOffsetTop:0,
       isShowTabControl:false,
-      saveY:0
+      saveY:0,
+
+      // 监听数据加载
+      BolHomeMultidata:true,
+      BolHomeGoods:true,
     }
   },
   components:{
@@ -81,6 +86,7 @@ export default {
     backtop,
   },
   created(){
+    // this.setLoading(true)
     this.getHomeMultidata(),
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
@@ -89,9 +95,26 @@ export default {
   computed:{
     showGoodsList(){
       return this.goods[this.currentType].list
+    },
+    Loading(){
+      const {BolHomeMultidata,BolHomeGoods}=this
+      return {
+        BolHomeMultidata,
+        BolHomeGoods
+      }
+    }
+  },
+  watch:{
+    Loading(nval){
+      if(!( nval.BolHomeMultidata || nval.BolHomeGoods)){
+        this.setLoading(false)
+      }else{
+        this.setLoading(true)
+      }
     }
   },
   methods: {
+    ...mapMutations(['setLoading']),
     // 事件监听相关方法
     tabClick(index){
       switch(index){
@@ -130,14 +153,21 @@ export default {
       // console.log(res);
         this.banners=res.data.banner.list;
         this.recommends=res.data.recommend.list;
+        this.$nextTick(()=>{
+          this.BolHomeMultidata=false
+        })
       })
     },
     getHomeGoods(type){
+      this.BolHomeGoods=true
       const page=this.goods[type].page+1
       getHomeGoods(type,page).then(res => {
         this.goods[type].list.push(...res.data.list)
         this.goods[type].page+=1
         this.$refs.scroll.finishPullUp()
+        this.$nextTick(()=>{
+          this.BolHomeGoods=false
+        })
       })
     }
   },
@@ -166,6 +196,7 @@ export default {
     z-index: 999;
     color: #fff;
     font-weight: bold;
+    font-size: 18px;
   }
   .tab-control{
     position: sticky;

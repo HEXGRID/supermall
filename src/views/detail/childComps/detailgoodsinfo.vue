@@ -47,40 +47,40 @@ export default {
 .goodinfo{
   padding: 0px 10px;
   margin-top: 15px;
-  border-bottom: .31rem solid #f2f5f8;
+  border-bottom: 3px solid #f2f5f8;
 }
 .title{
   color: #222;
-  font-size: 1.2rem;
+  font-size: 20px;
   text-align: justify;
 }
 .price{
-  margin-top: .5rem;
+  margin-top: 10px;
 }
 .n-price{
-  font-size: 1.7rem;
+  font-size: 20px;
   color: #ff5777;
 }
 .o-price{
-  margin-left: .3rem;
+  margin-left: 10px;
   text-decoration: line-through;
 }
 .discount{
-  font-size: .32rem;
+  font-size: 10px;
   position: relative;
-  top: -.106667rem;
-  margin-left: .4rem;
-  padding: .24rem 1rem;
+  top: -5px;
+  margin-left: 10px;
+  padding: 2px 20px;
   color: #fff;
-  border-radius: .5rem;
+  border-radius: 10px;
   background-color: rgb(241, 62, 58);
 }
 .info{
   display: flex;
-  margin-top: 1rem;
-  font-size: .9rem;
+  margin-top: 10px;
+  font-size: 14px;
   justify-content: space-between;
-  line-height: 2rem;
+  line-height: 30px;
   color: #999;
   border-bottom: 1px solid hsla(0,0%,39.2%,.1);
 }
@@ -88,16 +88,16 @@ export default {
   display: flex;
   justify-content: space-between;
   color: #333;
-  font-size: .9rem;
-  line-height: 1.5rem;
-  padding: 1.2rem 0;
+  font-size: 14px;
+  line-height: 30px;
+  padding: 10px 0;
   flex-wrap: wrap;
 }
 .services img{
-  width: .8rem;
+  width: 15px;
   vertical-align: middle;
 }
 .services span span{
-  margin-left: .2rem;
+  margin-left: 2px;
 }
 </style>
